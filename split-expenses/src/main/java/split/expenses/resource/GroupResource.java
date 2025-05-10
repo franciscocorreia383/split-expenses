@@ -1,5 +1,6 @@
 package split.expenses.resource;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -18,6 +19,7 @@ public class GroupResource {
     private GroupService groupService;
 
     @POST
+    @RolesAllowed("USER")
     @Operation(summary = "Cadastrar Grupo no Sistema", description = "Cria um novo grupo no sistema")
     @APIResponse(responseCode = "201", description = "Grupo criado com sucesso")
     public Response createGroup(GroupCreateDTO groupDTO) {
@@ -30,6 +32,7 @@ public class GroupResource {
     }
 
     @GET
+    @RolesAllowed("USER")
     @Operation(summary = "Listar Grupos Cadastrados no Sistema", description = "Retorna todos os grupos cadastrados no sistema")
     @APIResponse(responseCode = "200", description = "Lista retornada com sucesso")
     public Response getAllGroups() {
@@ -41,6 +44,7 @@ public class GroupResource {
     }
 
     @DELETE
+    @RolesAllowed("USER")
     @Path("/{id}")
     @Operation(summary = "Deletar Grupo no Sistema", description = "Deleta um grupo cadastrado no sistema")
     @APIResponse(responseCode = "200", description = "Grupo deletado com sucesso")
@@ -57,6 +61,7 @@ public class GroupResource {
     }
 
     @GET
+    @RolesAllowed("USER")
     @Path("/{id}")
     @Operation(summary = "Buscar Grupo Cadastrado Por ID", description = "Busca um grupo cadastrado no sistema por ID")
     @APIResponse(responseCode = "200", description = "Grupo deletado com sucesso")
@@ -74,6 +79,7 @@ public class GroupResource {
 
 
     @GET
+    @RolesAllowed("USER")
     @Path("/byUser/{id}")
     @Operation(summary = "Buscar Grupos Por ID de Criador", description = "Lista os grupos pelo ID de quem cadastrou!")
     @APIResponse(responseCode = "200", description = "Lista de Grupos retornada com sucesso")

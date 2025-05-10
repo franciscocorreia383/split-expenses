@@ -1,6 +1,7 @@
 package split.expenses.resource;
 
 import io.quarkus.security.UnauthorizedException;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -19,6 +20,7 @@ public class ParticipantResource {
     private ParticipantService participantService;
 
     @POST
+    @RolesAllowed("USER")
     @Operation(summary = "Cadastrar Participante Em Grupo No Sistema", description = "Cria um novo participante a um grupo existente no sistema")
     @APIResponse(responseCode = "201", description = "Participante criado com sucesso")
     public Response createParticipant(ParticipantCreateDTO participantDTO){
@@ -36,6 +38,7 @@ public class ParticipantResource {
 
     @GET
     @Path("/{userId}")
+    @RolesAllowed("USER")
     @Operation(summary = "Buscar Grupos Por Usuário", description = "Lista os grupos de um determinado participante")
     @APIResponse(responseCode = "200", description = "Lista de grupos retornada com sucesso")
     public Response getGruposByUserId(@PathParam("userId") Long userId){
@@ -49,6 +52,7 @@ public class ParticipantResource {
     }
 
     @DELETE
+    @RolesAllowed("USER")
     @Operation(summary = "Deletar Participante de Grupo", description = "Deleta um participante de um grupo")
     @APIResponse(responseCode = "200", description = "Participante deletado com sucesso")
     public Response deleteParticipant(ParticipantDeleteDTO deleteDTO) {

@@ -1,5 +1,7 @@
 package split.expenses.resource;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -17,6 +19,7 @@ public class UserResource {
     UserService userService;
 
     @GET
+    @RolesAllowed("USER")
     @Operation(summary = "Listar Usuários Cadastrados no Sistema", description = "Retorna todos os usuarios cadastrados no sistema")
     @APIResponse(responseCode = "200", description = "Lista retornada com sucesso")
     public Response getUsers() {
@@ -28,6 +31,7 @@ public class UserResource {
     }
 
     @POST
+    @PermitAll
     @Operation(summary = "Cadastrar Usuário no Sistema", description = "Cadastra um usuário no sistema")
     @APIResponse(responseCode = "201", description = "Usuário cadastrado com sucesso")
     public Response createUser(UserCreateDTO user) {
@@ -41,6 +45,7 @@ public class UserResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed("USER")
     @Operation(summary = "Buscar Usuário Por ID", description = "Busca um usuário no sistema por ID")
     @APIResponse(responseCode = "200", description = "Usuário retornado com sucesso")
     public Response getUserById(@PathParam("id") long id) {

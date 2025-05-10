@@ -1,5 +1,6 @@
 package split.expenses.resource;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -18,6 +19,7 @@ public class ExpenseResource {
     private ExpenseService expenseService;
 
     @POST
+    @RolesAllowed("USER")
     @Operation(summary = "Cadastrar Uma Despesa A Um Grupo", description = "Cadastra uma nova despesa a um grupo")
     @APIResponse(responseCode = "201", description = "Despesa criada com sucesso")
     public Response createExpense(ExpenseCreateDTO expenseDTO) {
@@ -32,6 +34,7 @@ public class ExpenseResource {
     }
 
     @PUT
+    @RolesAllowed("USER")
     @Operation(summary = "Atualizar Uma Despesa", description = "Atualiza uma despesa de um determinado grupo")
     @APIResponse(responseCode = "200", description = "Despesa alterada com sucesso")
     public Response updateExpense(ExpenseUpgradeDTO expenseDTO) {
@@ -47,6 +50,7 @@ public class ExpenseResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("USER")
     @Operation(summary = "Deletar Despesa no Sistema", description = "Deleta uma despesa cadastrado no sistema")
     @APIResponse(responseCode = "200", description = "Despesa deletado com sucesso")
     public Response deleteExpense(@PathParam("id") Long id) {
@@ -62,6 +66,7 @@ public class ExpenseResource {
 
     @GET
     @Path("/{group_id}")
+    @RolesAllowed("USER")
     @Operation(summary = "Listar Despesa do Grupo", description = "Lista as despesas cadastradas no grupo")
     @APIResponse(responseCode = "200", description = "Despesa listadas com sucesso")
     public Response getExpense(@PathParam("group_id") Long id) {
@@ -77,6 +82,7 @@ public class ExpenseResource {
 
     @GET
     @Path("/total/{group_id}")
+    @RolesAllowed("USER")
     @Operation(summary = "Listar Valor das Despesa do Grupo", description = "Lista a soma das despesas despesas cadastradas no grupo")
     @APIResponse(responseCode = "200", description = "Despesa listadas com sucesso")
     public Response getExpenseValue(@PathParam("group_id") Long id) {
