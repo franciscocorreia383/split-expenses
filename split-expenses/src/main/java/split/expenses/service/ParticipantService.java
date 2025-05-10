@@ -61,51 +61,42 @@ public class ParticipantService {
     }
 
     public List<GroupDTO> getGroupsByUserId(long userId) {
-        try {
-            List<Long> idList = new ArrayList<>();
-            List<GroupDTO> groups = new ArrayList<>();
+        List<Long> idList = new ArrayList<>();
+        List<GroupDTO> groups = new ArrayList<>();
 
-            UserEntity user = userRepository.findById(userId);
+        UserEntity user = userRepository.findById(userId);
 
-            if (user == null) {
-                throw new NotFoundException("Usuário não encontrado!");
-            }
-
-            participantRepository.findByUserId(user.getId()).stream().forEach(participant -> {
-                idList.add(participant.getGroup().getId());
-            });
-
-            groupRepository.findByIdList(idList).stream().forEach(group -> {
-                groups.add(groupMapper.groupEntityToGroupDTO(group));
-            });
-
-            return groups;
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (user == null) {
+            throw new NotFoundException("Usuário não encontrado!");
         }
+
+        participantRepository.findByUserId(user.getId()).stream().forEach(participant -> {
+            idList.add(participant.getGroup().getId());
+        });
+
+        groupRepository.findByIdList(idList).stream().forEach(group -> {
+            groups.add(groupMapper.groupEntityToGroupDTO(group));
+        });
+
+        return groups;
     }
 
     @Transactional
     public void deleteParticipant(ParticipantDeleteDTO participantDTO) {
-        try {
-            UserEntity user = userRepository.findById(participantDTO.getUserId());
-            GroupEntity group = groupRepository.findById(participantDTO.getGroupId());
+        UserEntity user = userRepository.findById(participantDTO.getUserId());
+        GroupEntity group = groupRepository.findById(participantDTO.getGroupId());
 
-            if (group == null || user == null) {
-                throw new NotFoundException("Usuário ou grupo não encontrado!");
-            }
-
-            ParticipantEntity participant = participantRepository.findParticipant(user.getId(), group.getId());
-
-            if (participant == null) {
-                throw new NotFoundException("Usuário não contrado no grupo!");
-            }
-
-            participantRepository.delete(participant);
-
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (group == null || user == null) {
+            throw new NotFoundException("Usuário ou grupo não encontrado!");
         }
+
+        ParticipantEntity participant = participantRepository.findParticipant(user.getId(), group.getId());
+
+        if (participant == null) {
+            throw new NotFoundException("Usuário não contrado no grupo!");
+        }
+
+        participantRepository.delete(participant);
     }
 
 }

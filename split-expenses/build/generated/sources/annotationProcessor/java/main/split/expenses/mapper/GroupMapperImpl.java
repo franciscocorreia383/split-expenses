@@ -9,7 +9,7 @@ import split.expenses.entity.GroupEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-10T12:07:56-0300",
+    date = "2025-05-10T19:36:39-0300",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.13.jar, environment: Java 17.0.14 (Microsoft)"
 )
 @ApplicationScoped

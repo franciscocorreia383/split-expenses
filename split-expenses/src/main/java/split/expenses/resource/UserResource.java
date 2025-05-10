@@ -53,7 +53,7 @@ public class UserResource {
             return Response.ok(userService.findUserById(id)).build();
         }catch (NotFoundException e){
             return Response.status(Response.Status.NOT_FOUND).build();
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return Response.serverError().entity(e.getMessage()).build();
         }
     }

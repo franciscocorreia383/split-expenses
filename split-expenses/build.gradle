@@ -39,6 +39,8 @@ dependencies {
     // Criptografia da senha
     implementation 'io.quarkus:quarkus-elytron-security-common'
 
+    //Migrations
+    implementation("io.quarkus:quarkus-flyway")
 
 }
 

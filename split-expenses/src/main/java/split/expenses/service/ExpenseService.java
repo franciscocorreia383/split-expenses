@@ -31,82 +31,67 @@ public class ExpenseService {
 
     @Transactional
     public void createExpense(ExpenseCreateDTO expenseDTO) {
-        try {
-            GroupEntity group = groupRepository.findById(expenseDTO.getGroupId());
+        GroupEntity group = groupRepository.findById(expenseDTO.getGroupId());
 
-            if(group == null){
-                throw new NotFoundException("Group not found");
-            }
-
-            ExpenseEntity expenseEntity = expenseMapper.expenseCreateDTOToExpenseEntity(expenseDTO);
-            expenseEntity.setGroup(group);
-            expenseEntity.setDate(new Date());
-
-            expenseRepository.persist(expenseEntity);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (group == null) {
+            throw new NotFoundException("Group not found");
         }
+
+        ExpenseEntity expenseEntity = expenseMapper.expenseCreateDTOToExpenseEntity(expenseDTO);
+        expenseEntity.setGroup(group);
+        expenseEntity.setDate(new Date());
+
+        expenseRepository.persist(expenseEntity);
     }
 
     @Transactional
     public void deleteExpense(long expenseId) {
-        try {
-            ExpenseEntity expenseEntity = expenseRepository.findById(expenseId);
+        ExpenseEntity expenseEntity = expenseRepository.findById(expenseId);
 
-            if(expenseEntity == null){
-                throw new NotFoundException("Expense not found");
-            }
-
-            expenseRepository.delete(expenseEntity);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (expenseEntity == null) {
+            throw new NotFoundException("Expense not found");
         }
+
+        expenseRepository.delete(expenseEntity);
     }
 
     @Transactional
     public void updateExpense(ExpenseUpgradeDTO expenseDTO) {
-        try{
-            ExpenseEntity expenseEntity = expenseRepository.findById(expenseDTO.getId());
 
-            if(expenseEntity == null){
-                throw new NotFoundException("Expense not found");
-            }
+        ExpenseEntity expenseEntity = expenseRepository.findById(expenseDTO.getId());
 
-            expenseEntity.setDescription(expenseDTO.getDescription());
-            expenseEntity.setTotal(expenseDTO.getTotal());
-
-            expenseRepository.persist(expenseEntity);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (expenseEntity == null) {
+            throw new NotFoundException("Expense not found");
         }
+
+        expenseEntity.setDescription(expenseDTO.getDescription());
+        expenseEntity.setTotal(expenseDTO.getTotal());
+
+        expenseRepository.persist(expenseEntity);
     }
 
     @Transactional
     public List<ExpenseDTO> getAllExpenses(long groupId) {
-        try{
-            GroupEntity group = groupRepository.findById(groupId);
+        GroupEntity group = groupRepository.findById(groupId);
 
-            if(group == null){
-                throw new NotFoundException("Group not found");
-            }
-
-            List<ExpenseDTO> expenses = new ArrayList<>();
-
-            expenseRepository.listByGroupId(group.getId()).stream().forEach(expense -> {
-                expenses.add(expenseMapper.expenseEntityToExpenseDTO(expense));
-            });
-
-            return expenses;
-        }catch (RuntimeException e){
-            throw new RuntimeException(e);
+        if (group == null) {
+            throw new NotFoundException("Group not found");
         }
+
+        List<ExpenseDTO> expenses = new ArrayList<>();
+
+        expenseRepository.listByGroupId(group.getId()).stream().forEach(expense -> {
+            expenses.add(expenseMapper.expenseEntityToExpenseDTO(expense));
+        });
+
+        return expenses;
     }
 
     @Transactional
     public double getTotalExpensiveGroup(long groupId) {
         GroupEntity group = groupRepository.findById(groupId);
 
-        if(group == null){
+        if (group == null) {
             throw new NotFoundException("Group not found");
         }
 

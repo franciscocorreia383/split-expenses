@@ -37,16 +37,12 @@ public class UserService {
 
     @Transactional
     public void createUser(UserCreateDTO userCreateDTO) {
-        try {
             UserEntity user = userMapper.userCreateDTOToUserEntity(userCreateDTO);
 
             user.setPassword(BcryptUtil.bcryptHash(userCreateDTO.getPassword()));
             user.setCreatedAt(new Date());
 
             userRepository.persist(user);
-        }catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void inativeUser(Long id) {

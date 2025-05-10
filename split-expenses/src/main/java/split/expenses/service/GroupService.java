@@ -29,77 +29,54 @@ public class GroupService {
 
     @Transactional
     public void createGroup(GroupCreateDTO group) {
-        try{
-            GroupEntity groupEntity = groupMapper.groupCreateDTOToGroup(group);
-            groupRepository.persist(groupEntity);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+        GroupEntity groupEntity = groupMapper.groupCreateDTOToGroup(group);
+        groupRepository.persist(groupEntity);
     }
 
     @Transactional
     public List<GroupDTO> listGroups() {
-        try{
-            List<GroupDTO> groups = new ArrayList<>();
-            groupRepository.findAll().stream().forEach(group -> {
-                groups.add(groupMapper.groupEntityToGroupDTO(group));
-            });
-            return groups;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        List<GroupDTO> groups = new ArrayList<>();
+        groupRepository.findAll().stream().forEach(group -> {
+            groups.add(groupMapper.groupEntityToGroupDTO(group));
+        });
+        return groups;
     }
 
     @Transactional
     public void deleteGroupById(long id) {
-        try{
-            GroupEntity group = groupRepository.findById(id);
+        GroupEntity group = groupRepository.findById(id);
 
-            if (group == null){
-                throw new NotFoundException("Grupo não encontrado!");
-            }
-
-            groupRepository.delete(group);
-
-        }catch (Exception e){
-            throw new RuntimeException(e);
+        if (group == null) {
+            throw new NotFoundException("Grupo não encontrado!");
         }
+
+        groupRepository.delete(group);
     }
 
     public GroupDTO findGroupById(long id) {
-        try{
-            GroupEntity group = groupRepository.findById(id);
+        GroupEntity group = groupRepository.findById(id);
 
-            if (group == null){
-                throw new NotFoundException("Grupo não encontrado!");
-            }
-
-            return groupMapper.groupEntityToGroupDTO(group);
-
-        }catch (Exception e){
-            throw new RuntimeException(e);
+        if (group == null) {
+            throw new NotFoundException("Grupo não encontrado!");
         }
+
+        return groupMapper.groupEntityToGroupDTO(group);
     }
 
     public List<GroupDTO> findGroupsByCreator(long creator) {
-        try{
-            UserEntity user = userRepository.findById(creator);
+        UserEntity user = userRepository.findById(creator);
 
-            if (user == null){
-                throw new NotFoundException("Usuário não encontrado!");
-            }
-
-            List<GroupDTO> groups = new ArrayList<>();
-
-            groupRepository.findByCreator(user.getId()).stream().forEach(group -> {
-                groups.add(groupMapper.groupEntityToGroupDTO(group));
-            });
-
-            return groups;
-
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (user == null) {
+            throw new NotFoundException("Usuário não encontrado!");
         }
+
+        List<GroupDTO> groups = new ArrayList<>();
+
+        groupRepository.findByCreator(user.getId()).stream().forEach(group -> {
+            groups.add(groupMapper.groupEntityToGroupDTO(group));
+        });
+
+        return groups;
     }
 
 }
