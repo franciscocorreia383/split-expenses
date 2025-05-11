@@ -3,6 +3,7 @@ com.aayushatharva.brotli4j:service::jar:1.16.0
 com.fasterxml.jackson.core:jackson-annotations::jar:2.18.2
 com.fasterxml.jackson.core:jackson-core::jar:2.18.2
 com.fasterxml.jackson.core:jackson-databind::jar:2.18.2
+com.fasterxml.jackson.dataformat:jackson-dataformat-toml::jar:2.18.2
 com.fasterxml.jackson.dataformat:jackson-dataformat-yaml::jar:2.18.2
 com.fasterxml.jackson.datatype:jackson-datatype-jdk8::jar:2.18.2
 com.fasterxml.jackson.datatype:jackson-datatype-jsr310::jar:2.18.2
@@ -51,6 +52,8 @@ io.quarkus:quarkus-datasource-common::jar:3.21.3
 io.quarkus:quarkus-datasource::jar:3.21.3
 io.quarkus:quarkus-development-mode-spi::jar:3.21.3
 io.quarkus:quarkus-elytron-security-common::jar:3.21.3
+io.quarkus:quarkus-flyway-postgresql::jar:3.21.3
+io.quarkus:quarkus-flyway::jar:3.21.3
 io.quarkus:quarkus-fs-util::jar:0.0.10
 io.quarkus:quarkus-hibernate-orm-panache-common::jar:3.21.3
 io.quarkus:quarkus-hibernate-orm-panache::jar:3.21.3
@@ -152,6 +155,8 @@ org.eclipse.microprofile.jwt:microprofile-jwt-auth-api::jar:2.1
 org.eclipse.microprofile.openapi:microprofile-openapi-api::jar:4.0.2
 org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api::jar:3.0.1
 org.eclipse.parsson:parsson::jar:1.1.7
+org.flywaydb:flyway-core::jar:11.3.4
+org.flywaydb:flyway-database-postgresql::jar:11.3.4
 org.glassfish.jaxb:jaxb-core::jar:4.0.5
 org.glassfish.jaxb:jaxb-runtime::jar:4.0.5
 org.glassfish.jaxb:txw2::jar:4.0.5

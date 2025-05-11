@@ -14,6 +14,6 @@ import split.expenses.dto.user.UserDTO;
 @Builder
 @Jacksonized
 public class ParticipantCreateDTO {
-    private UserDTO user;
-    private GroupDTO group;
+    private long userId;
+    private long groupId;
 }

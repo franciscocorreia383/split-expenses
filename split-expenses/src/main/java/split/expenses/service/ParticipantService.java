@@ -40,8 +40,8 @@ public class ParticipantService {
 
     @Transactional
     public void createParticipant(ParticipantCreateDTO participantDTO) {
-        UserEntity user = userRepository.findById(participantDTO.getUser().getId());
-        GroupEntity group = groupRepository.findById(participantDTO.getGroup().getId());
+        UserEntity user = userRepository.findById(participantDTO.getUserId());
+        GroupEntity group = groupRepository.findById(participantDTO.getGroupId());
 
         if (group == null || user == null) {
             throw new NotFoundException("Usuário ou Grupo não encontrado!");
