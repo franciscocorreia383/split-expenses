@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'io.quarkus'
+    id "org.sonarqube" version "4.4.1.3373"
 }
 
 repositories {
@@ -41,6 +42,12 @@ dependencies {
 
     //Migrations
     implementation("io.quarkus:quarkus-flyway")
+
+    // JUnit 5
+    testImplementation("io.quarkus:quarkus-junit5")
+
+    // Mockito
+    testImplementation("org.mockito:mockito-core:5.12.0")
 
 }
 

@@ -41,6 +41,7 @@ public class UserService {
 
             user.setPassword(BcryptUtil.bcryptHash(userCreateDTO.getPassword()));
             user.setCreatedAt(new Date());
+            user.setEnabled(true);
 
             userRepository.persist(user);
     }

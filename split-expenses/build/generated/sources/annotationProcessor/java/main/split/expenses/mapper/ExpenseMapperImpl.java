@@ -13,8 +13,8 @@ import split.expenses.entity.GroupEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-10T21:05:17-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.13.jar, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2025-05-28T20:59:49-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.13.jar, environment: Java 17.0.14 (Microsoft)"
 )
 @ApplicationScoped
 public class ExpenseMapperImpl implements ExpenseMapper {

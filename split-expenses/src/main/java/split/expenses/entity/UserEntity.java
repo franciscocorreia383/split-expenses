@@ -19,12 +19,14 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private String password;
 
     private boolean enabled;
 
+    @Column(name = "created_at")
     private Date createdAt;
 
     @OneToMany(mappedBy = "createdBy")
